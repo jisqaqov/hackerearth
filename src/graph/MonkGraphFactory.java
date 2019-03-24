@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * @author Jandos Iskakov
- * problem: problem: Graph > Graph Representation > Monk at the Graph Factory
+ * problem: Monk at the Graph Factory
  * algorithm: tree has n-1 edges, sum all degrees,
  * hence every edge counted twice get devision by two to calculate number of edges
  */
