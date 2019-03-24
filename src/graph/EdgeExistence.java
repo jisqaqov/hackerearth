@@ -1,9 +1,11 @@
+package graph;
+
 import java.io.PrintWriter;
 import java.util.*;
 
 /**
  * @author Jandos Iskakov
- * problem: Graph Representation: TEST YOUR UNDERSTANDING
+ * problem: Graph > Graph Representation > TEST YOUR UNDERSTANDING
  */
 public class EdgeExistence {
 
