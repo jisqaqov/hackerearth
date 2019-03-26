@@ -20,11 +20,11 @@ public class OliverAndTheBattle {
         while (t-- > 0) {
             int n = in.nextInt(), m = in.nextInt();
 
-            boolean[][] groud = new boolean[n][m];
+            boolean[][] ground = new boolean[n][m];
 
             for (int  i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
-                    groud[i][j] = in.nextInt() == 1;
+                    ground[i][j] = in.nextInt() == 1;
                 }
             }
 
@@ -34,7 +34,7 @@ public class OliverAndTheBattle {
 
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
-                    if (!groud[i][j] || visited[i][j]) {
+                    if (!ground[i][j] || visited[i][j]) {
                         continue;
                     }
 
@@ -53,7 +53,7 @@ public class OliverAndTheBattle {
 
                         for (int x = row == 0? 0: row - 1; x < n && x >= 0 && x <= row + 1; x++) {
                             for (int y = col == 0? 0: col - 1; y < m && y >= 0 && y <= col + 1; y++) {
-                                if (!visited[x][y] && groud[x][y]) {
+                                if (!visited[x][y] && ground[x][y]) {
                                     visited[x][y] = true;
                                     queue.add(new int[] {x, y});
                                     soldiers++;
