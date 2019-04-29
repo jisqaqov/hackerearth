@@ -14,10 +14,12 @@ import java.util.*;
 public class MinimumSpanningTree {
 
     public static void main(String[] args) throws IOException {
+        MinimumSpanningTree solution = new MinimumSpanningTree();
+
         FastReader in = new FastReader();
         PrintWriter out = new PrintWriter(System.out);
 
-        out.println(kruskal(in));
+        out.println(solution.kruskal(in));
 
         out.flush();
 
@@ -25,7 +27,7 @@ public class MinimumSpanningTree {
         out.close();
     }
 
-    private static int kruskal(FastReader in) throws IOException {
+    private int kruskal(FastReader in) throws IOException {
         int n = in.nextInt();
         int m = in.nextInt();
 
@@ -64,11 +66,11 @@ public class MinimumSpanningTree {
         return mst;
     }
 
-    private static boolean find(int x, int y, int[] ds) {
+    private boolean find(int x, int y, int[] ds) {
         return root(ds, x) == root(ds, y);
     }
 
-    private static int root(int[] ds, int x) {
+    private int root(int[] ds, int x) {
         while (x != ds[x]) {
             ds[x] = ds[ds[x]];
             x = ds[x];
@@ -77,7 +79,7 @@ public class MinimumSpanningTree {
         return x;
     }
 
-    private static void union(int x, int y, int[] ds) {
+    private void union(int x, int y, int[] ds) {
         int rootX = root(ds, x);
         int rootY = root(ds, y);
 
