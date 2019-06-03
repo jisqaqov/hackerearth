@@ -28,15 +28,27 @@ public class ShortestPathProblem {
             throws IOException {
         int[] dis = new int[n];
 
-        int[][] edges = new int[n][3];
+        int[][] edgesTemp = new int[m][3];
 
-        for (int i = 0; i < m; i++) {
-            edges[i][0] = in.nextInt() - 1;
-            edges[i][1] = in.nextInt() - 1;
-            edges[i][2] = in.nextInt();
+        int edgeSize = 0;
+
+        try {
+            for (int i = 0; i < m; i++) {
+                edgesTemp[i][0] = in.nextInt() - 1;
+                edgesTemp[i][1] = in.nextInt() - 1;
+                edgesTemp[i][2] = in.nextInt();
+
+                edgeSize++;
+            }
+        } catch (Exception e) {
+            //
         }
 
+        int[][] edges = Arrays.copyOf(edgesTemp, edgeSize);
+
         int INFINITE = (int) Math.pow(10, 9);
+
+        int[] parent = new int[n];
 
         Arrays.fill(dis, INFINITE);
         dis[0] = 0;
@@ -49,6 +61,7 @@ public class ShortestPathProblem {
 
                 if (dis[v] > dis[u] + weight) {
                     dis[v] = dis[u] + weight;
+                    parent[v] = u;
                 }
             }
         }
@@ -56,10 +69,15 @@ public class ShortestPathProblem {
         for (int i = 1; i < n; i++) {
             out.print(dis[i] + " ");
         }
+
+        System.out.println();
+
+        for (int i = 1; i < n; i++) {
+            out.print(parent[i] + " ");
+        }
     }
 
-    private static void dijkstra(FastReader in, PrintWriter out, int n, int m)
-            throws IOException {
+    private static void dijkstra(FastReader in, PrintWriter out, int n, int m) {
         List<Pair>[] adjList = new ArrayList[n];
 
         try {
@@ -72,16 +90,15 @@ public class ShortestPathProblem {
                     adjList[u] = new ArrayList<>();
                 }
 
-                adjList[u].add(new Pair(v, w));
-
                 if (adjList[v] == null) {
                     adjList[v] = new ArrayList<>();
                 }
 
+                adjList[u].add(new Pair(v, w));
                 adjList[v].add(new Pair(u, w));
             }
         } catch (Exception e) {
-            ;
+            //
         }
 
         boolean[] visited = new boolean[n];
@@ -104,22 +121,22 @@ public class ShortestPathProblem {
             }
 
             visited[u] = true;
-            dis[u] = node.value2;
 
             if (adjList[u] != null) {
                 for (Pair adj : adjList[u]) {
                     int v = adj.value1;
-                    int w = adj.value2;
+                    int weight = adj.value2;
 
-                    if (dis[v] > dis[u] + w) {
-                        heap.add(new Pair(v, dis[u] + w));
+                    if (dis[v] > dis[u] + weight) {
+                        dis[v] = dis[u] + weight;
+                        heap.add(new Pair(v, dis[u] + weight));
                     }
                 }
             }
         }
 
-        for (int i = 1; i < n; i++) {
-            out.print(dis[i] + " ");
+        for (int t = 1; t < n; t++) {
+            out.print(dis[t] + " ");
         }
     }
 
@@ -141,16 +158,10 @@ public class ShortestPathProblem {
         }
 
         public String next() throws IOException {
-            String token = null;
-            if (tok == null) {
-                return null;
-            }
-
-            while (!tok.hasMoreElements()) {
+            while (tok != null && !tok.hasMoreElements()) {
                 String line = br.readLine();
                 if (line != null) {
                     tok = new StringTokenizer(line);
-                    //token = tok.nextToken();
                 } else {
                     tok = null;
                 }
