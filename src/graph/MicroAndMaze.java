@@ -46,23 +46,10 @@ public class MicroAndMaze {
 
         visited[x][y] = true;
 
-        if (dfs(x - 1, y, a, visited, n, m)) {
-            return true;
-        }
-
-        if (dfs(x + 1, y, a, visited, n, m)) {
-            return true;
-        }
-
-        if (dfs(x, y - 1, a, visited, n, m)) {
-            return true;
-        }
-
-        if (dfs(x, y + 1, a, visited, n, m)) {
-            return true;
-        }
-
-        return false;
+        return dfs(x - 1, y, a, visited, n, m) ||
+               dfs(x + 1, y, a, visited, n, m) ||
+               dfs(x, y - 1, a, visited, n, m) ||
+               dfs(x, y + 1, a, visited, n, m);
     }
 
     private static class FastReader {
